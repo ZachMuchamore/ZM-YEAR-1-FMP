@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 7515192733005034115}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.1713, y: 2.2646, z: -0.2457}
+  m_LocalPosition: {x: 11.824972, y: 2.2718127, z: -0.2457}
   m_LocalScale: {x: 0.1, y: 0.002, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -191,7 +191,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.7
+  m_Time: 0.05
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -200,8 +200,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.08785629
-        value: 0
+        time: 0.031986237
+        value: 0.031448364
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -245,10 +245,10 @@ TrailRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 0
-    textureScale: {x: 1, y: 1}
+    textureScale: {x: 0.1, y: 0.1}
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0.01
   m_MaskInteraction: 0
   m_Autodestruct: 0
   m_Emitting: 1
