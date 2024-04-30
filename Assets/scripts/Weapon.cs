@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Weapon : MonoBehaviour
 {
-    public Camera playerCamera;
 
     // shooting
     public bool isShooting, readyToShoot;
@@ -25,6 +26,15 @@ public class Weapon : MonoBehaviour
     public float bulletVelocity = 30f;
     public float bulletPrefabLifeTime = 3f; // seconds
 
+    //Reloading
+    public float reloadTime;
+    public int magazineSize;
+    public int bulletsLeft;
+    public bool isReloading;
+
+    public GameObject muzzleEffect;
+    private Animator animator;
+
     public enum ShootingMode 
     {
         Single,
@@ -38,11 +48,15 @@ public class Weapon : MonoBehaviour
     {
         readyToShoot = true;
         burstBulletsLeft = bulletsPerBurst;
+        animator = GetComponent<Animator>();
+        bulletsLeft = magazineSize;
     }
 
     void Update()
     {
-       if(currentShootingMode == ShootingMode.Auto)
+
+
+        if(currentShootingMode == ShootingMode.Auto)
         {
             // Holding Down Left Mouse Button
             isShooting = Input.GetKey(KeyCode.Mouse0);
@@ -53,16 +67,41 @@ public class Weapon : MonoBehaviour
             isShooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
 
-        if (readyToShoot && isShooting)
+        // Reload when R is pressed 
+        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && isReloading == false)
+        {
+            Reload();
+        }
+
+        // Reload when mag is empty
+        if (readyToShoot && isShooting == false && isReloading == false && bulletsLeft <= 0)
+        {
+            Reload();
+        }
+
+        if (readyToShoot && isShooting && bulletsLeft > 0)
         {
             burstBulletsLeft = bulletsPerBurst;
             FireWeapon();
+        }
+
+        if (AmmoManager.Instance.ammoDisplay != null)
+        {
+            AmmoManager.Instance.ammoDisplay.text = $"{bulletsLeft / bulletsPerBurst}/{magazineSize / bulletsPerBurst}";
         }
 
     }
 
     private void FireWeapon()
     {
+        bulletsLeft--;
+
+
+        muzzleEffect.GetComponent<ParticleSystem>().Play();
+
+        animator.SetTrigger("Recoil");
+
+
         readyToShoot = false;
 
         Vector3 shootingDirection = CalculateDirectionAndSpread().normalized;
@@ -94,6 +133,18 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    private void Reload()
+    {
+        isReloading = true;
+        Invoke("ReloadCompleted", reloadTime);
+    }
+
+    private void ReloadCompleted()
+    {
+        bulletsLeft = magazineSize;
+        isReloading = false;
+    }
+
     private void ResetShot()
     {
         readyToShoot = true;
@@ -103,7 +154,7 @@ public class Weapon : MonoBehaviour
     public Vector3 CalculateDirectionAndSpread()
     {
         // Shooting from the middle of the screen to check where are we pointing at
-        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
         Vector3 targetpoint;
