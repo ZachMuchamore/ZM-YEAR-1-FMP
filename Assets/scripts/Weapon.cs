@@ -55,6 +55,7 @@ public class Weapon : MonoBehaviour
     void Update()
     {
 
+        print(currentShootingMode);
 
         if(currentShootingMode == ShootingMode.Auto)
         {
@@ -85,9 +86,9 @@ public class Weapon : MonoBehaviour
             FireWeapon();
         }
 
-        if (AmmoManager.Instance.ammoDisplay != null)
+        if (AmmoManager.instance.ammoDisplay != null)
         {
-            AmmoManager.Instance.ammoDisplay.text = $"{bulletsLeft / bulletsPerBurst}/{magazineSize / bulletsPerBurst}";
+            AmmoManager.instance.ammoDisplay.text = $"{bulletsLeft / bulletsPerBurst}/{magazineSize / bulletsPerBurst}";
         }
 
     }
@@ -135,6 +136,8 @@ public class Weapon : MonoBehaviour
 
     private void Reload()
     {
+        animator.SetTrigger("Reload");
+
         isReloading = true;
         Invoke("ReloadCompleted", reloadTime);
     }

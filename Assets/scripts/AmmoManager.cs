@@ -5,21 +5,24 @@ using UnityEngine;
 
 public class AmmoManager : MonoBehaviour
 {
-    public static AmmoManager Instance { get; set; }
+    public static AmmoManager instance;// { get; set; }
 
     // UI
     public TextMeshProUGUI ammoDisplay;
 
     public void Awake()
     {
-        if (Instance == null && Instance != this)
+        if (instance == null)
         {
-            Destroy(gameObject);
+            instance = this; 
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Instance = this;
+            Destroy(gameObject);
         }
+
+        print("instance=" + instance);
     }
 
 }
