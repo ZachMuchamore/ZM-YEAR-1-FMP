@@ -22,7 +22,6 @@ public class AmmoManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        print("instance=" + instance);
     }
 
 }

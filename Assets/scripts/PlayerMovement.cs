@@ -6,18 +6,24 @@ public class PlayerMovement : MonoBehaviour
 {
     private CharacterController controller;
 
-    public float speed = 12f;
+    public float speed = 100f;
     public float gravity = -9.81f * 2;
     public float jumpHeight = 6f;
 
     public Transform groundCheck;
-    public float groundDistance = 0.4f;
+    public float groundDistance = 0.8f;
     public LayerMask groundMask;
 
     Vector3 velocity;
 
     bool isGrounded;
     bool isMoving;
+
+    float currentAngle;
+    float rotationSmoothTime = 1;
+    float currentAngleVelocity;
+
+    public GameObject cam;
 
     private Vector3 lastPosition = new Vector3(0f, 0f, 0f);
     void Start()
@@ -27,24 +33,46 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        // Ground check
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        // Resseting the default velocity
-        if(isGrounded && velocity.y < 0)
+
+
+        MovePlayer();
+        PlayerJump();
+        GroundCheck();
+
+        print(velocity);
+
+    }
+
+
+    void MovePlayer()
+    {
+        float hMov = Input.GetAxisRaw("Horizontal");
+        Vector3 movement = new Vector3(hMov, 0, Input.GetAxisRaw("Vertical")).normalized;
+
+        if (movement.magnitude >= 0.1f)
         {
-            velocity.y = -2f;
+            float targetAngle = Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
+            currentAngle = Mathf.SmoothDampAngle(currentAngle, targetAngle, ref currentAngleVelocity, rotationSmoothTime);
+            Vector3 rotatedMovement = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward * 0.2f;
+            controller.Move(rotatedMovement * speed * Time.deltaTime);
         }
 
-        // Getting the inputs
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        if (lastPosition != gameObject.transform.position && isGrounded == true)
+        {
+            isMoving = true;
+            // for later use
+        }
+        else
+        {
+            isMoving = false;
+            //for later use
+        }
+        lastPosition = gameObject.transform.position;
+    }
 
-        // Creating the moving vector
-        Vector3 move = transform.right * x + transform.forward * z; //(right - red axis, forward - blue axis
 
-        // Actually moving the player 
-        controller.Move(move * speed * Time.deltaTime);
-
+    void PlayerJump()
+    {
         // Check is the player can jump
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -57,21 +85,28 @@ public class PlayerMovement : MonoBehaviour
 
         // Exectuting the jump
         controller.Move(velocity * Time.deltaTime);
-
-        if (lastPosition != gameObject.transform.position && isGrounded == true)
-        {
-            isMoving = true;
-            // for later use
-        }
-        else
-        {
-            isMoving = false;
-            //for later use
-        }
-
-        lastPosition = gameObject.transform.position;
-
-        
-    
     }
+
+
+    void GroundCheck()
+    {
+        // Ground check
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        // Resetting the default velocity
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = 0f;
+            print("reset vel");
+        }
+    }
+
 }
+
+
+
+
+
+
+
+

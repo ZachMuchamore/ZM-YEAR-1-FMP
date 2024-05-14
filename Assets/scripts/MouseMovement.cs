@@ -13,10 +13,13 @@ public class MouseMovement : MonoBehaviour
     public float topClamp = -90f;
     public float bottomClamp = 90f;
 
+    public GameObject cam;
+
     void Start()
     {
         // locking the cursor to the middle of the screen 
         Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     void Update()
@@ -35,6 +38,8 @@ public class MouseMovement : MonoBehaviour
         yRotation += mouseX;
 
         // Apply Rotations to our transform
-        transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+        cam.transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+
+
     }
 }
