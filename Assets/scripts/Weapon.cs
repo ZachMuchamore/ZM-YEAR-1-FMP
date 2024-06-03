@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
+    public GameObject Emptymag;
+
     public bool isActiveWeapon;
 
     // shooting
@@ -44,6 +47,14 @@ public class Weapon : MonoBehaviour
         M1911,
         M4_8
     }
+
+    public void Start()
+    {
+
+        Emptymag.SetActive(false);
+
+    }
+
 
     public WeaponModel thisWeaponModel;
 
@@ -90,7 +101,12 @@ public class Weapon : MonoBehaviour
             // Reload when mag is empty
             if (readyToShoot && isShooting == false && isReloading == false && bulletsLeft <= 0)
             {
-                Reload();
+                Emptymag.SetActive(true);
+            }
+            else
+            {
+                Emptymag.SetActive(false);
+
             }
 
             if (readyToShoot && isShooting && bulletsLeft > 0)

@@ -17,13 +17,23 @@ public class MouseMovement : MonoBehaviour
 
     void Start()
     {
-        // locking the cursor to the middle of the screen 
-        Cursor.lockState = CursorLockMode.Locked;
+        
 
     }
 
     void Update()
     {
+        if (PauseMenu.isPaused)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            // locking the cursor to the middle of the screen 
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        
+
         // Getting mouse inputs 
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;

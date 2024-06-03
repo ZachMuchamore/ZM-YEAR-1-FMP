@@ -50,12 +50,14 @@ public class EnemyAI : MonoBehaviour
         {
             Patroling();
             anim.SetBool("Chase", false);
+
         }
-                
+
         if (playerInSightRange && !playerInAttackRange)
         {
             ChasePlayer();
             anim.SetBool("Chase", true);
+
         }
 
         if (playerInSightRange && playerInAttackRange)
@@ -108,6 +110,8 @@ public class EnemyAI : MonoBehaviour
     }
     private void AttackPlayer()
     {
+        anim.SetTrigger("Attack");
+
         agent.SetDestination(transform.position);
 
         transform.LookAt(player);

@@ -39,7 +39,6 @@ public class PlayerMovement : MonoBehaviour
         PlayerJump();
         GroundCheck();
 
-        print(velocity);
 
     }
 
@@ -97,7 +96,6 @@ public class PlayerMovement : MonoBehaviour
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = 0f;
-            print("reset vel");
         }
     }
 

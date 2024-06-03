@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AmmoManager : MonoBehaviour
 {
     public static AmmoManager instance;// { get; set; }
+
 
     // UI
     public TextMeshProUGUI ammoDisplay;
@@ -22,6 +24,10 @@ public class AmmoManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+    }
+    public void Update()
+    {
+        
     }
 
 }
