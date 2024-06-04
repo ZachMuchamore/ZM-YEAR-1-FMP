@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
+    public int weaponDamage;
+
     public GameObject Emptymag;
 
     public bool isActiveWeapon;
@@ -140,6 +142,9 @@ public class Weapon : MonoBehaviour
 
         // Instantiate the bullet
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
+
+        Bullet bul = bullet.GetComponent<Bullet>();
+        bul.bulletDamage = weaponDamage;
 
         // Pointing the bullet to face the shooting direction
         bullet.transform.forward = shootingDirection;

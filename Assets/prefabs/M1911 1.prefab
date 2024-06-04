@@ -279,6 +279,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d0a52ceafe8294589408b5eb266a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponDamage: 20
+  Emptymag: {fileID: 0}
   isActiveWeapon: 0
   isShooting: 0
   readyToShoot: 0
