@@ -8,7 +8,6 @@ public class EnemyAI : MonoBehaviour
 {
     [SerializeField] private int HP = 100;
 
-    public NavMeshAgent agent;
 
     public Transform player;
 
@@ -23,7 +22,6 @@ public class EnemyAI : MonoBehaviour
     private void Awake()
     {
         player = GameObject.Find("player").transform;
-        agent = GetComponent<NavMeshAgent>();
         Rigidbody rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
 
@@ -41,7 +39,6 @@ public class EnemyAI : MonoBehaviour
         if (HP <= 0)
         {
             anim.SetTrigger("Die");
-            Destroy(gameObject);
         }
         else
         {

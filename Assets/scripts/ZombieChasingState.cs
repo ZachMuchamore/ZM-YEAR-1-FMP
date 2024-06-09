@@ -36,7 +36,6 @@ public class ZombieChasingState : StateMachineBehaviour
         {
             animator.SetBool("Chasing", false);
         }
-        animator.SetBool("Attacking", true);
 
 
         // check if the agent should attack

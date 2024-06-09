@@ -11,7 +11,10 @@ public class Bullet : MonoBehaviour
     {
         if (objectWeHit.gameObject.CompareTag("Target"))
         {
-            print("hit " + objectWeHit.gameObject.name + " !");
+            Destroy(gameObject);
+        }
+        if (objectWeHit.gameObject.CompareTag("Ground"))
+        {
             Destroy(gameObject);
         }
 

@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Target
   - Wall
+  - Ground
+  - Zombie
+  - Enemy
+  - Waypoints
+  - ZombieHand
   layers:
   - Default
   - TransparentFX
