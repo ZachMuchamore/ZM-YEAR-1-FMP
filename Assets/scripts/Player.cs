@@ -14,8 +14,14 @@ public class Player : MonoBehaviour
 
     public TextMeshProUGUI playerHealthUI;
     public GameObject gameOverUI;
+    public GameObject ammoCount;
+    public GameObject timer;
 
-    public bool isDead;
+    public Button MenuButton;
+    public Button QuitButton;
+
+
+    public static bool isDead;
 
     private void Start()
     {
@@ -44,20 +50,27 @@ public class Player : MonoBehaviour
 
     private void PlayerDead()
     {
-        GetComponent<MouseMovement>().enabled = false;
         GetComponent<PlayerMovement>().enabled = false;
 
         playerHealthUI.gameObject.SetActive(false);
+        timer.gameObject.SetActive(false);
+        ammoCount.gameObject.SetActive(false);
+        MenuButton.gameObject.SetActive(true);
+        QuitButton.gameObject.SetActive(true);
+
+
+
 
         GetComponentInChildren<Animator>().enabled = true;
 
         GetComponent<ScreenFader>().StartFade();
+
         StartCoroutine(ShowGameOverUI());
     }
 
     private IEnumerator ShowGameOverUI()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         gameOverUI.gameObject.SetActive(true);
 
     }

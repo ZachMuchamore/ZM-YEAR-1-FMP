@@ -15,7 +15,7 @@ public class ScreenFader : MonoBehaviour
 
     private IEnumerator FadeOut()
     {
-        float timer = 0f;
+        float timer = 3f;
         Color startColor = fadeImage.color;
         Color endColor = new Color(0f, 0f, 0f, 1f); // Black with alpha 1.
 

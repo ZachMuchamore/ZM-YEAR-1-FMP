@@ -17,7 +17,6 @@ public class MouseMovement : MonoBehaviour
 
     void Start()
     {
-        
 
     }
 
@@ -32,6 +31,7 @@ public class MouseMovement : MonoBehaviour
             // locking the cursor to the middle of the screen 
             Cursor.lockState = CursorLockMode.Locked;
         }
+        
         
 
         // Getting mouse inputs 
