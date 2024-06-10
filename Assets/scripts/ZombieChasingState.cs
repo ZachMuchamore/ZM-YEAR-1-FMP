@@ -30,7 +30,6 @@ public class ZombieChasingState : StateMachineBehaviour
         float distanceFromPlayer = Vector3.Distance(player.position, animator.transform.position);
 
 
-
         // check if the agent should stop chasing
         if (distanceFromPlayer > stopChasingDistance)
         {
