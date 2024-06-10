@@ -27,6 +27,6 @@ public class ZombieSpawnController : MonoBehaviour
 
     private void StartNextWave()
     {
-        currentZombiesAlive.Clear
+
     }
 }

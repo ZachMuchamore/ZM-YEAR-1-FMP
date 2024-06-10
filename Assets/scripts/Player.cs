@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject ammoCount;
     public GameObject timer;
+    public GameObject blackout;
 
     public Button MenuButton;
     public Button QuitButton;
@@ -63,9 +64,15 @@ public class Player : MonoBehaviour
 
         GetComponentInChildren<Animator>().enabled = true;
 
-        GetComponent<ScreenFader>().StartFade();
+        StartCoroutine(Blackout());
 
         StartCoroutine(ShowGameOverUI());
+    }
+
+    private IEnumerator Blackout()
+    { 
+        yield return new WaitForSeconds(3f);
+        blackout.gameObject.SetActive(true );
     }
 
     private IEnumerator ShowGameOverUI()
