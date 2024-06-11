@@ -33,7 +33,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Chasing_State
-  m_Speed: 2
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -3969131878251444592}
@@ -112,7 +112,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Patroling_State
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5656067111988405799}
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idleTime: 4
-  detectionAreaRadius: 50
+  detectionAreaRadius: 150
 --- !u!1101 &-5656067111988405799
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -461,7 +461,7 @@ AnimatorStateMachine:
     m_Position: {x: 440, y: 150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6384787513205973921}
-    m_Position: {x: 350, y: 280, z: 0}
+    m_Position: {x: 370, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8889618962266370869}
     m_Position: {x: 600, y: 350, z: 0}
@@ -524,7 +524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolingTime: 10
-  detectionAreaRadius: 70
+  detectionAreaRadius: 150
   patrolSpeed: 2
 --- !u!114 &6850547334002825368
 MonoBehaviour:
@@ -539,7 +539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseSpeed: 10
-  stopChasingDistance: 80
+  stopChasingDistance: 160
   attackingDistance: 5
 --- !u!1101 &7932517525325741628
 AnimatorStateTransition:

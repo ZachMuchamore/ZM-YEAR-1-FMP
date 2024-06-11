@@ -12,19 +12,18 @@ public class EnemyAI : MonoBehaviour
     public Transform player;
 
     private Animator anim;
+    public bool dead;
 
     public LayerMask whatIsGround, whatIsPlayer;
-
-    Rigidbody rb;
 
 
    
     private void Awake()
     {
         player = GameObject.Find("player").transform;
-        Rigidbody rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-
+        GlobalReferences.instance.hasDied = false;
+        dead = false;
     }
     private void Update()
     {
@@ -39,6 +38,11 @@ public class EnemyAI : MonoBehaviour
         if (HP <= 0)
         {
             anim.SetTrigger("Die");
+            GlobalReferences.instance.hasDied = true;
+            GlobalReferences.instance.zombieNumber++;
+            dead = true;
+            DestroyZombie();
+
         }
         else
         {
@@ -53,11 +57,21 @@ public class EnemyAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, 5f);
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, 70f);
+        Gizmos.DrawWireSphere(transform.position, 160f);
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, 80f);
+        Gizmos.DrawWireSphere(transform.position, 150f);
     }
+
+    private IEnumerator DestroyZombie()
+    {
+        yield return new WaitForSeconds(3f);
+            Destroy(gameObject); 
+        
+    }
+
+    
+    
 
 
 }

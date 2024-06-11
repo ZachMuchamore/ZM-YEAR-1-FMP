@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
 
     bool isGrounded;
-    bool isMoving;
 
     float currentAngle;
     float rotationSmoothTime = 1;
@@ -58,13 +57,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (lastPosition != gameObject.transform.position && isGrounded == true)
         {
-            isMoving = true;
-            // for later use
+
         }
         else
         {
-            isMoving = false;
-            //for later use
+
         }
         lastPosition = gameObject.transform.position;
     }

@@ -3,23 +3,32 @@ using System.Collections.Generic;
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 
 public class MainMenus : MonoBehaviour
 {
     public GameObject mainMenu;
 
-    public GameObject optionsMenu;
-
     public GameObject controlsMenu;
+
+    public TextMeshProUGUI highScoreUI;
+    public TextMeshProUGUI zombiesKilledUI;
+    public TextMeshProUGUI timePlayedUI;
+
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        int highScore = SaveLoadManager.instance.LoadHighScore();
+        highScoreUI.text = $"Highest Wave Achieved: {highScore}";
+
+        int ZombieScore = SaveLoadManager.instance.LoadZombieScore();
+        highScoreUI.text = $"Most Zombies Killed: {ZombieScore}";
+
         mainMenu.SetActive(true);
-        optionsMenu.SetActive(false);
         controlsMenu.SetActive(false);
 
     }
@@ -30,24 +39,21 @@ public class MainMenus : MonoBehaviour
         
     }
 
-    public void OptionsMenu()
+    public void ScoresMenu()
     {
         mainMenu.SetActive(false);
-        optionsMenu.SetActive(true);
         controlsMenu.SetActive(false);
     }
 
     public void ControlsMenu()
     {
         mainMenu.SetActive(false);
-        optionsMenu.SetActive(false);
         controlsMenu.SetActive(true);
     }
 
     public void BackToMain()
     {
         mainMenu.SetActive(true);
-        optionsMenu.SetActive(false);
         controlsMenu.SetActive(false);
     }
 

@@ -80,6 +80,12 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(1f);
         gameOverUI.gameObject.SetActive(true);
 
+        int waveSurvived = GlobalReferences.instance.waveNumber;
+        SaveLoadManager.instance.SaveHighScore(waveSurvived-1);
+
+        int zombiesKilled = GlobalReferences.instance.zombieNumber;
+        SaveLoadManager.instance.SaveZombiesKilled(zombiesKilled);
+
     }
 
     private IEnumerator BloodyScreenEffect()
